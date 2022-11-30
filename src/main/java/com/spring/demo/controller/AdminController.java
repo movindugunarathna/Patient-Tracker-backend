@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/admin")
@@ -24,5 +25,19 @@ public class AdminController {
         return adminRepository.save(a);
     }
 
+    @GetMapping(value = "/find/{id}")
+    public Optional<Admin> findById(@PathVariable Long id) {
+        return adminRepository.findById(id);
+    }
+
+    @DeleteMapping(value = "/remove/{id}")
+    public boolean deleteById(@PathVariable Long id) {
+        try {
+            adminRepository.deleteById(id);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
+    }
 
 }
