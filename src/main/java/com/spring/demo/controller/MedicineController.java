@@ -22,22 +22,22 @@ public class MedicineController {
 	@Autowired
 	private MedicineRepository medicineRepository;
 	
-	@GetMapping(value = "/medicineList")
+	@GetMapping(value = "/all")
 	public List<Medicine> getAllMedicines() {
 		return medicineRepository.findAll();
 	}
 	
-	@GetMapping(value = "/findMedicine/{serial}")
+	@GetMapping(value = "/find/{serial}")
 	public Optional<Medicine> findById(@PathVariable Long serial) {
 		return medicineRepository.findById(serial);
 	}
 	
-	@PostMapping(value = "/addMedicine")
+	@PostMapping(value = "/add")
 	public Medicine insertMed(Medicine medicine) {
 		return medicineRepository.save(medicine);
 	}
 
-	@PutMapping(value = "/updateMedicine/{serial}")
+	@PutMapping(value = "/update/{serial}")
 	public Medicine updateMed(Medicine medicine, @PathVariable Long serial) {
 
 		Optional<Medicine> med = medicineRepository.findById(serial);
@@ -49,7 +49,7 @@ public class MedicineController {
 		return null;
 	}
 	
-	@DeleteMapping(value = "/deleteMedicine/{serial}")
+	@DeleteMapping(value = "/delete/{serial}")
 	public boolean deleteMed(@PathVariable Long serial) {
 		try {
 			medicineRepository.deleteById(serial);
