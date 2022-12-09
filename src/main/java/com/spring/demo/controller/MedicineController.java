@@ -34,6 +34,7 @@ public class MedicineController {
 	
 	@PostMapping(value = "/add")
 	public Medicine insertMed(Medicine medicine) {
+		System.out.println(medicine.getSerialNumber());
 		return medicineRepository.save(medicine);
 	}
 
@@ -43,7 +44,7 @@ public class MedicineController {
 		Optional<Medicine> med = medicineRepository.findById(serial);
 		
 		if(med != null) {
-			medicineRepository.deleteById(serial);
+			//medicineRepository.deleteById(serial);
 			return medicineRepository.save(medicine);
 		}
 		return null;
