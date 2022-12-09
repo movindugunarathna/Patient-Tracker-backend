@@ -6,6 +6,9 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Table(name = "medicine")
@@ -21,9 +24,11 @@ public class Medicine {
 	private double price;
 	
     @Column(name = "manufactured_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date manufacturedDate;
 	
     @Column(name = "expiry_date")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date expiryDate;
 	
     @Column(name = "notes")
