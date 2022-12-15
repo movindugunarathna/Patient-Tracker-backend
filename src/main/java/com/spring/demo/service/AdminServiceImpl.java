@@ -3,9 +3,12 @@ package com.spring.demo.service;
 import com.spring.demo.domain.Admin;
 import com.spring.demo.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
+@Service
 public class AdminServiceImpl implements AdminService {
     @Autowired
     AdminRepository adminRepository;
@@ -27,5 +30,10 @@ public class AdminServiceImpl implements AdminService {
         } catch (Exception e) {
             System.out.println();
         }
+    }
+
+    @Override
+    public List<Admin> fetchAll() {
+        return adminRepository.findAll();
     }
 }

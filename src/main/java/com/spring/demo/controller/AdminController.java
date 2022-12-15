@@ -5,6 +5,7 @@ import com.spring.demo.service.AdminServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -30,5 +31,10 @@ public class AdminController {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @GetMapping(value = "/list")
+    public List<Admin> listAllAdmins(){
+        return adminServiceImpl.fetchAll();
     }
 }
