@@ -7,13 +7,13 @@ import com.spring.demo.domain.Medicine;
 
 public interface MedicineService {
 
-	public List<Medicine> getAllMedicines();
-	
-	public Optional<Medicine> findById(Long serial);
-	
-	public Medicine insertMed(Medicine medicine);
+    public List<Medicine> getAllMedicines();
 
-	public Medicine updateMed(Medicine medicine, Long serial);
-	
-	public void deleteMed(Long serial);
+    public Optional<Medicine> findById(Long serial);
+
+    public Medicine insertMed(Medicine medicine);
+
+    public Medicine updateMed(Medicine medicine, Long serial);
+
+    public void deleteMed(Long serial);
 }

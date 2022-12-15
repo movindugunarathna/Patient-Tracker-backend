@@ -1,10 +1,9 @@
 package com.spring.demo.controller;
 
-import com.spring.demo.domain.Admin;
 import com.spring.demo.domain.Doctor;
-import com.spring.demo.repository.AdminRepository;
 import com.spring.demo.repository.DoctorRepository;
 
+import com.spring.demo.service.DoctorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,33 +13,37 @@ import java.util.Optional;
 @RestController
 @RequestMapping(value = "/doctor")
 public class DoctorController {
-
     @Autowired
-    private DoctorRepository doctorRepository;
+    private DoctorServiceImpl doctorServiceImpl;
 
     @GetMapping(value = "/list")
     public List<Doctor> fetchAll() {
-        return doctorRepository.findAll();
+        return doctorServiceImpl.getAllDoctors();
     }
 
     @PostMapping(value = "/add")
     public Doctor doctor(@RequestBody Doctor d) {
-        return doctorRepository.save(d);
+        return doctorServiceImpl.createNewDoctor(d);
     }
 
     @GetMapping(value = "/find/{id}")
     public Optional<Doctor> findById(@PathVariable Long id) {
-        return doctorRepository.findById(id);
+        return doctorServiceImpl.findById(id);
     }
 
     @DeleteMapping(value = "/remove/{id}")
     public boolean deleteById(@PathVariable Long id) {
         try {
-            doctorRepository.deleteById(id);
+            doctorServiceImpl.removeDoctor(id);
             return true;
         } catch (Exception e) {
             return false;
         }
+    }
+
+    @PutMapping(value = "/update/{id}")
+    public Doctor updateDoctor(@RequestBody Doctor updateDoctor, @PathVariable Long id) {
+        return doctorServiceImpl.updateDoctor(updateDoctor, id);
     }
 
 }
