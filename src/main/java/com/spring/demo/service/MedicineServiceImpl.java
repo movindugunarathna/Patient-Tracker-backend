@@ -35,6 +35,7 @@ public class MedicineServiceImpl implements MedicineService{
 		Optional<Medicine> med = medicineRepository.findById(serial);
 
 		if(med != null) {
+			medicine.setSerialNumber(serial);
 			return medicineRepository.save(medicine);
 		}
 		return null;

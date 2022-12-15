@@ -35,6 +35,7 @@ public class Medicine {
 	
     @Column(name = "expiry_date",nullable = false, length = 512)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Expiry date cannot be blank")
 	private Date expiryDate;
 	
     @Column(name = "notes",nullable = false, length = 2048)
