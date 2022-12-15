@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface AdminService {
-    public Admin addNewAdmin(Admin admin);
-    public Optional<Admin> getAdminById(Long id);
-    public void removeAdmin(Long id);
-    public List<Admin> fetchAll();
+    Admin addNewAdmin(Admin admin);
+    Optional<Admin> getAdminById(Long id);
+    void removeAdmin(Long id);
+    List<Admin> fetchAll();
 }
