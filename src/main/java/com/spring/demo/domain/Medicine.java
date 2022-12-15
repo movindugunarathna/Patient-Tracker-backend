@@ -20,7 +20,7 @@ public class Medicine {
     @NotNull(message = "Serial number cannot be blank")
 	private long serialNumber;
 	
-    @Column(name = "medicine_name",nullable = false, length = 512, unique = true)
+	@Column(name = "medicine_name", nullable = false, length = 512, unique = true)
     @NotBlank(message = "Medicine name cannot be blank")
 	private String medicineName;
 	

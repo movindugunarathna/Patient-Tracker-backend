@@ -1,4 +1,4 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,9 +8,10 @@ import org.springframework.stereotype.Service;
 
 import com.spring.demo.domain.Patient;
 import com.spring.demo.repository.PatientRepository;
+import com.spring.demo.service.PatientService;
 
 @Service
-public class PatientServiceImpl implements PatientService{
+public class PatientServiceImpl implements PatientService {
 
 	@Autowired
 	private PatientRepository patientRepository;
@@ -34,7 +35,7 @@ public class PatientServiceImpl implements PatientService{
 	public Patient updatePatient(Patient patient, Long id) {
 		Optional<Patient> findPatient = patientRepository.findById(id);
 
-		if(findPatient != null) {
+		if (findPatient != null) {
 			return patientRepository.save(patient);
 		}
 		return null;
@@ -49,4 +50,3 @@ public class PatientServiceImpl implements PatientService{
 		}
 	}
 }
-	

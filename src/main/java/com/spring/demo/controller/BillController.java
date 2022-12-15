@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.demo.domain.Bill;
-import com.spring.demo.service.BillServiceImpl;
+import com.spring.demo.service_impl.BillServiceImpl;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;

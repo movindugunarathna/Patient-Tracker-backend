@@ -1,92 +1,110 @@
 package com.spring.demo.domain;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "admin")
+@Table(name = "ADMIN")
 public class Admin {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long adminId;
-    @Column(name = "FIRSTNAME")
-    private String firstName;
-    @Column(name = "LASTNAME")
-    private String lastName;
-    @Column(name = "AGE")
-    private String age;
-    @Column(name = "GENDER")
-    private String gender;
-    @Column(name = "CONTACTNUMBER")
-    private String contactNumber;
-    @Column(name = "PASSWORD")
-    private String password;
+	@Id
+	@NotNull(message = "Please enter ID")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private long adminId;
 
-    public Admin() {
-    }
+	@Column(name = "FIRSTNAME", nullable = false)
+	@NotBlank(message = "Please enter first name")
+	private String firstName;
 
-    public Admin(long adminId, String firstName, String lastName, String age, String gender, String contactNumber, String password) {
-        this.adminId = adminId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.age = age;
-        this.gender = gender;
-        this.contactNumber = contactNumber;
-        this.password = password;
-    }
+	@Column(name = "LASTNAME", nullable = false)
+	@NotBlank(message = "Please enter last name")
+	private String lastName;
 
-    public long getAdminId() {
-        return adminId;
-    }
+	@Column(name = "AGE", nullable = false)
+	@NotBlank(message = "Please enter age")
+	private String age;
 
-    public void setAdminId(long adminId) {
-        this.adminId = adminId;
-    }
+	@Column(name = "GENDER", nullable = false)
+	@NotBlank(message = "Please enter gender")
+	private String gender;
 
-    public String getFirstName() {
-        return firstName;
-    }
+	@Column(name = "CONTACTNUMBER", nullable = false)
+	@NotBlank(message = "Please enter contact number")
+	@Pattern(regexp = "^\\d{10}$", message = "Contact number must be a numeric value with 10 digits")
+	private String contactNumber;
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
+	@Column(name = "PASSWORD", nullable = false)
+	@NotBlank(message = "Please enter password")
+	private String password;
 
-    public String getLastName() {
-        return lastName;
-    }
+	public Admin() {
+	}
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
+	public Admin(long adminId, String firstName, String lastName, String age, String gender, String contactNumber,
+			String password) {
+		this.adminId = adminId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.age = age;
+		this.gender = gender;
+		this.contactNumber = contactNumber;
+		this.password = password;
+	}
 
-    public String getAge() {
-        return age;
-    }
+	public long getAdminId() {
+		return adminId;
+	}
 
-    public void setAge(String age) {
-        this.age = age;
-    }
+	public void setAdminId(long adminId) {
+		this.adminId = adminId;
+	}
 
-    public String getGender() {
-        return gender;
-    }
+	public String getFirstName() {
+		return firstName;
+	}
 
-    public void setGender(String gender) {
-        this.gender = gender;
-    }
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
 
-    public String getContactNumber() {
-        return contactNumber;
-    }
+	public String getLastName() {
+		return lastName;
+	}
 
-    public void setContactNumber(String contactNumber) {
-        this.contactNumber = contactNumber;
-    }
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getAge() {
+		return age;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public void setAge(String age) {
+		this.age = age;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+
+	public String getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(String contactNumber) {
+		this.contactNumber = contactNumber;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 }

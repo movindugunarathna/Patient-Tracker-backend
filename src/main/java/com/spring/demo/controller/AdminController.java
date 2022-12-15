@@ -1,7 +1,8 @@
 package com.spring.demo.controller;
 
 import com.spring.demo.domain.Admin;
-import com.spring.demo.service.AdminServiceImpl;
+import com.spring.demo.service_impl.AdminServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

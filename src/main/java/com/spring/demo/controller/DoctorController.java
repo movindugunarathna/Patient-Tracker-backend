@@ -2,8 +2,8 @@ package com.spring.demo.controller;
 
 import com.spring.demo.domain.Doctor;
 import com.spring.demo.repository.DoctorRepository;
+import com.spring.demo.service_impl.DoctorServiceImpl;
 
-import com.spring.demo.service.DoctorServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

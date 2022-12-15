@@ -1,7 +1,9 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import com.spring.demo.domain.Admin;
 import com.spring.demo.repository.AdminRepository;
+import com.spring.demo.service.AdminService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

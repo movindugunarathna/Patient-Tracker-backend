@@ -1,8 +1,10 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import com.spring.demo.domain.Doctor;
 import com.spring.demo.domain.Medicine;
 import com.spring.demo.repository.DoctorRepository;
+import com.spring.demo.service.DoctorService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

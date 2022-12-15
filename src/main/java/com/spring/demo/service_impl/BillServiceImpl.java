@@ -1,4 +1,4 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.demo.domain.Bill;
 import com.spring.demo.repository.BillRepository;
+import com.spring.demo.service.BillService;
 
 @Service
 public class BillServiceImpl implements BillService{

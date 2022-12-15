@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.demo.domain.Medicine;
 import com.spring.demo.repository.MedicineRepository;
 import com.spring.demo.service.MedicineService;
-import com.spring.demo.service.MedicineServiceImpl;
+import com.spring.demo.service_impl.MedicineServiceImpl;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Positive;
