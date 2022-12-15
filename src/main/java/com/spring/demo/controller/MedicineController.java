@@ -14,50 +14,38 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.demo.domain.Medicine;
 import com.spring.demo.repository.MedicineRepository;
+import com.spring.demo.service.MedicineService;
+import com.spring.demo.service.MedicineServiceImpl;
 
 @RestController
 @RequestMapping(value = "/medicine")
 public class MedicineController {
-	
+
 	@Autowired
-	private MedicineRepository medicineRepository;
-	
+	private MedicineServiceImpl medicineServiceImpl;
+
 	@GetMapping(value = "/all")
 	public List<Medicine> getAllMedicines() {
-		return medicineRepository.findAll();
+		return medicineServiceImpl.getAllMedicines();
 	}
-	
+
 	@GetMapping(value = "/find/{serial}")
 	public Optional<Medicine> findById(@PathVariable Long serial) {
-		return medicineRepository.findById(serial);
+		return medicineServiceImpl.findById(serial);
 	}
-	
+
 	@PostMapping(value = "/add")
 	public Medicine insertMed(Medicine medicine) {
-		System.out.println(medicine.getSerialNumber());
-		return medicineRepository.save(medicine);
+		return medicineServiceImpl.insertMed(medicine);
 	}
 
 	@PutMapping(value = "/update/{serial}")
 	public Medicine updateMed(Medicine medicine, @PathVariable Long serial) {
-
-		Optional<Medicine> med = medicineRepository.findById(serial);
-		
-		if(med != null) {
-			//medicineRepository.deleteById(serial);
-			return medicineRepository.save(medicine);
-		}
-		return null;
+		return medicineServiceImpl.updateMed(medicine, serial);	
 	}
-	
+
 	@DeleteMapping(value = "/delete/{serial}")
-	public boolean deleteMed(@PathVariable Long serial) {
-		try {
-			medicineRepository.deleteById(serial);
-			return true;
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return false;
-		}
+	public void deleteMed(@PathVariable Long serial) {
+		medicineServiceImpl.deleteMed(serial);
 	}
 }
