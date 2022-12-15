@@ -14,7 +14,7 @@
 	<name>Patient_Tracker-Backend</name>
 	<description>Patient Tracker project for HCL training</description>
 	<properties>
-		<java.version>19</java.version>
+		<java.version>11</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -42,6 +42,9 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+<!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-dependency-plugin -->
+
+
 	</dependencies>
 
 	<build>
