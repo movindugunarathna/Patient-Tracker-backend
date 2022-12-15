@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Patient {
@@ -12,18 +13,27 @@ public class Patient {
 	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long patientId;
+
 	@Column(name = "FIRSTNAME")
 	private String firstName;
+
 	@Column(name = "LASTNAME")
 	private String lastName;
+
 	@Column(name = "AGE")
 	private String age;
+
 	@Column(name = "GENDER")
 	private String gender;
+
 	@Column(name = "CONTACTNUMBER")
 	private String contactNumber;
+
 	@Column(name = "NOTES")
 	private String notes;
+
+	@OneToOne(mappedBy = "patient")
+	private Prescription prescription;
 
 	public Patient() {
 		super();
@@ -96,4 +106,13 @@ public class Patient {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+
+	public Prescription getPrescription() {
+		return prescription;
+	}
+
+	public void setPrescription(Prescription prescription) {
+		this.prescription = prescription;
+	}
+
 }

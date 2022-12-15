@@ -1,4 +1,4 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.demo.domain.Clerk1;
 import com.spring.demo.repository.Cler1kRepository;
+import com.spring.demo.service.ClerkService;
 
 @Service
 public class ClerkServiceImpl implements ClerkService{

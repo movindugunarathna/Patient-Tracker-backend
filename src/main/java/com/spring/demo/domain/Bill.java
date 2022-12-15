@@ -21,19 +21,19 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "patient_name",nullable = false, length = 512, unique = true)
+	@Column(name = "patient_name", nullable = false, length = 512, unique = true)
 	@NotBlank(message = "Patient name cannot be blank")
 	private String patient;
 
-	@Column(name = "cost",nullable = false, length = 512)
+	@Column(name = "cost", nullable = false, length = 512)
 	@NotNull(message = "Cost cannot be blank")
 	private double cost;
 
-	@Column(name = "notes",nullable = false, length = 2048)
+	@Column(name = "notes", nullable = false, length = 2048)
 	@NotNull(message = "Notes cannot be blank")
 	private String notes;
 
-	@Column(name = "bill_date",nullable = false, length = 512)
+	@Column(name = "bill_date", nullable = false, length = 512)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@NotNull(message = "Bill date cannot be blank")
 	private Date billDate;

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.demo.domain.Patient;
-import com.spring.demo.service.PatientServiceImpl;
+import com.spring.demo.service_impl.PatientServiceImpl;
 
 @RestController
 @RequestMapping(value = "/patient")
