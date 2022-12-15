@@ -78,5 +78,4 @@ public class Prescription {
 	public void setPrescriptionDate(Date prescriptionDate) {
 		this.prescriptionDate = prescriptionDate;
 	}
-
 }
