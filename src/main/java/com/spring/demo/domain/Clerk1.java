@@ -5,8 +5,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name = "Clerk")
 public class Clerk1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,21 +29,21 @@ public class Clerk1 {
     @Column(name = "contactNo")
     private String contactNo;
 
-    @Column(name = "password")
-    private String password;
+    @Column(name = "department")
+    private String department;
 
     public Clerk1(){
 
     }
 
-    public Clerk1(long clerkID, String firstName, String lastName, String age, String contactNo, String gender, String password){
+    public Clerk1(long clerkID, String firstName, String lastName, String age, String contactNo, String gender, String department){
         this.clerkID = clerkID;
         this.firstName = firstName;
         this.lastName = lastName;
         this.gender = gender;
         this.age = age;
         this.contactNo = contactNo;
-        this.password = password;
+        this.department = department;
     }
 
     public long getClerkID() {
@@ -92,11 +94,11 @@ public class Clerk1 {
         this.contactNo = contactNo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getDepartment() {
+        return department;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setDepartment(String department) {
+        this.department = department;
     }
 }
