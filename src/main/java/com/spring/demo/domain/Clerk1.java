@@ -7,7 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class Clerk {
+public class Clerk1 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long clerkID;
@@ -30,11 +30,11 @@ public class Clerk {
     @Column(name = "password")
     private String password;
 
-    public Clerk(){
+    public Clerk1(){
 
     }
 
-    public Clerk(long clerkID, String firstName, String lastName, String age, String contactNo, String gender, String password){
+    public Clerk1(long clerkID, String firstName, String lastName, String age, String contactNo, String gender, String password){
         this.clerkID = clerkID;
         this.firstName = firstName;
         this.lastName = lastName;

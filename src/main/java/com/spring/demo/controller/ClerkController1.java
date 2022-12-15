@@ -11,33 +11,33 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.spring.demo.domain.Clerk;
-import com.spring.demo.repository.ClerkRepository;
+import com.spring.demo.domain.Clerk1;
+import com.spring.demo.repository.Cler1kRepository;
 
 @RestController
 @RequestMapping(value = "/clerk")
-public class ClerkController {
+public class ClerkController1 {
    @Autowired
-   private ClerkRepository clerkRepository;
+   private Cler1kRepository clerkRepository;
    
    @PostMapping(value = "/add")
-   public Clerk addClerk(@RequestBody Clerk clerk){
+   public Clerk1 addClerk(@RequestBody Clerk1 clerk){
       return clerkRepository.save(clerk);
    }
 
    @GetMapping(value = "/getAll")
-   public List<Clerk> getAllClerks(){
+   public List<Clerk1> getAllClerks(){
       return clerkRepository.findAll();
    }
 
    @GetMapping(value = "get")
-   public Clerk getClerk(@PathVariable("clerkID") long clerkID){
+   public Clerk1 getClerk(@PathVariable("clerkID") long clerkID){
       return clerkRepository.findByClerkID(clerkID).get(0);
    }
 
    @PutMapping(value = "/update/{clerkID}")
-   public Clerk updateClerk(@PathVariable("clerkID") long clerkID, @RequestBody Clerk clerk){
-      Clerk returnClerk = clerkRepository.findByClerkID(clerkID).get(0);
+   public Clerk1 updateClerk(@PathVariable("clerkID") long clerkID, @RequestBody Clerk1 clerk){
+      Clerk1 returnClerk = clerkRepository.findByClerkID(clerkID).get(0);
       returnClerk.setFirstName(clerk.getFirstName());
       returnClerk.setLastName(clerk.getFirstName());
       returnClerk.setAge(clerk.getFirstName());
