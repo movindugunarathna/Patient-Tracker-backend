@@ -6,6 +6,8 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.persistence.*;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,23 +17,29 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Medicine {
 	
 	@Id
+    @NotNull(message = "Serial number cannot be blank")
 	private long serialNumber;
 	
-    @Column(name = "medicine_name")
+    @Column(name = "medicine_name",nullable = false, length = 512, unique = true)
+    @NotBlank(message = "Medicine name cannot be blank")
 	private String medicineName;
 	
-    @Column(name = "price")
+    @Column(name = "price",nullable = false, length = 512)
+    @NotNull(message = "Price cannot be blank")
 	private double price;
 	
-    @Column(name = "manufactured_date")
+    @Column(name = "manufactured_date",nullable = false, length = 512)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Manufactured date cannot be blank")
 	private Date manufacturedDate;
 	
-    @Column(name = "expiry_date")
+    @Column(name = "expiry_date",nullable = false, length = 512)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
+    @NotNull(message = "Expiry date cannot be blank")
 	private Date expiryDate;
 	
-    @Column(name = "notes")
+    @Column(name = "notes",nullable = false, length = 2048)
+    @NotNull(message = "Notes cannot be blank")
 	private String notes;
 
 	public Medicine() {
