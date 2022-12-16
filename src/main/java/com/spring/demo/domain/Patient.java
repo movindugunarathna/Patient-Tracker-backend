@@ -1,10 +1,14 @@
 package com.spring.demo.domain;
 
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 
 @Entity
@@ -34,6 +38,9 @@ public class Patient {
 
 	@OneToOne(mappedBy = "patient")
 	private Prescription prescription;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+    private Set<Bill> bill;
 
 	public Patient() {
 		super();
