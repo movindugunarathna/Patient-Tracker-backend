@@ -9,7 +9,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "Clerk")
-public class Clerk1 {
+public class Clerk {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long clerkID;
@@ -32,11 +32,11 @@ public class Clerk1 {
     @Column(name = "department")
     private String department;
 
-    public Clerk1(){
+    public Clerk(){
 
     }
 
-    public Clerk1(long clerkID, String firstName, String lastName, String age, String contactNo, String gender, String department){
+    public Clerk(long clerkID, String firstName, String lastName, String age, String contactNo, String gender, String department){
         this.clerkID = clerkID;
         this.firstName = firstName;
         this.lastName = lastName;
