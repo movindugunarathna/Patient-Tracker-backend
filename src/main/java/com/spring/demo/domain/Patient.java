@@ -1,5 +1,7 @@
 package com.spring.demo.domain;
 
+import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import jakarta.persistence.CascadeType;
@@ -9,12 +11,13 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
-@Table
+@Table(name = "patients")
 public class Patient {
 	
 	@Id
@@ -46,13 +49,16 @@ public class Patient {
 	
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Bill> bill;
+	
+	@ManyToMany(mappedBy = "patientList", fetch = FetchType.EAGER)
+	private Set<Doctor> doctorList;
 
 	public Patient() {
 		super();
 	}
 
 	public Patient(long patientId, String firstName, String lastName, String age, String gender, String contactNumber,
-			String notes) {
+			String notes, Prescription prescription, Set<Bill> bill, Set<Doctor> doctorList) {
 		super();
 		this.patientId = patientId;
 		this.firstName = firstName;
@@ -61,6 +67,9 @@ public class Patient {
 		this.gender = gender;
 		this.contactNumber = contactNumber;
 		this.notes = notes;
+		this.prescription = prescription;
+		this.bill = bill;
+		this.doctorList = doctorList;
 	}
 
 	public long getPatientId() {
@@ -127,4 +136,21 @@ public class Patient {
 		this.prescription = prescription;
 	}
 
+	public Set<Bill> getBill() {
+		return bill;
+	}
+
+	public void setBill(Set<Bill> bill) {
+		this.bill = bill;
+	}
+
+	public Set<Doctor> getDoctorList() {
+		return doctorList;
+	}
+
+	public void setDoctorList(Set<Doctor> doctorList) {
+		this.doctorList = doctorList;
+	}
+
+	
 }
