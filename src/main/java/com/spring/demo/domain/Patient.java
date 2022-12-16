@@ -4,6 +4,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -21,9 +23,7 @@ import jakarta.persistence.Table;
 public class Patient {
 	
 	@Id
-	@Column(name = "ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	
 	private long patientId;
 
 	@Column(name = "FIRSTNAME")
@@ -50,8 +50,9 @@ public class Patient {
 	@OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Set<Bill> bill;
 	
+	@JsonIgnore
 	@ManyToMany(mappedBy = "patientList", fetch = FetchType.EAGER)
-	private Set<Doctor> doctorList;
+	private Set<Doctor> doctorList = new HashSet<Doctor>();
 
 	public Patient() {
 		super();
