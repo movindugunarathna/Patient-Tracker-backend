@@ -6,6 +6,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -23,9 +24,9 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "patient_name", nullable = false, length = 512, unique = true)
-	@NotBlank(message = "Patient name cannot be blank")
-	private String name;
+	//	@Column(name = "patient_name", nullable = false, length = 512, unique = true)
+	//	@NotBlank(message = "Patient name cannot be blank")
+	//	private String name;
 
 	@Column(name = "cost", nullable = false, length = 512)
 	@NotNull(message = "Cost cannot be blank")
@@ -40,7 +41,7 @@ public class Bill {
 	@NotNull(message = "Bill date cannot be blank")
 	private Date billDate;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "Patient_id")
 	Patient patient;
 
@@ -48,13 +49,12 @@ public class Bill {
 		super();
 	}
 
-	public Bill(long id, @NotBlank(message = "Patient name cannot be blank") String name,
+	public Bill(long id,
 			@NotNull(message = "Cost cannot be blank") double cost,
 			@NotNull(message = "Notes cannot be blank") String notes,
 			@NotNull(message = "Bill date cannot be blank") Date billDate, Patient patient) {
 		super();
 		this.id = id;
-		this.name = name;
 		this.cost = cost;
 		this.notes = notes;
 		this.billDate = billDate;
@@ -67,14 +67,6 @@ public class Bill {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	public double getCost() {
