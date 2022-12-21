@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.demo.domain.Doctor;
 import com.spring.demo.domain.Medicine;
 import com.spring.demo.repository.MedicineRepository;
 import com.spring.demo.service.MedicineService;
@@ -52,4 +53,5 @@ public class MedicineController {
 	public void deleteMed(@PathVariable @Positive Long serial) {
 		medicineServiceImpl.deleteMed(serial);
 	}
+
 }
