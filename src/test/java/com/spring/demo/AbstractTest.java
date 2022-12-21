@@ -20,7 +20,7 @@ import com.spring.demo.PatientTrackerBackendApplication;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(classes = PatientTrackerBackendApplication.class)
 @WebAppConfiguration
-public abstract class PatientTest {
+public abstract class AbstractTest {
 	
 	protected MockMvc mvc;
 	   @Autowired

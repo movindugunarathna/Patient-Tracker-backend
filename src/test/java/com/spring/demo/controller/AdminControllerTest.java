@@ -10,10 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.spring.demo.PatientTest;
+import com.spring.demo.AbstractTest;
 import com.spring.demo.domain.Admin;
 
-public class AdminControllerTest extends PatientTest {
+public class AdminControllerTest extends AbstractTest {
 
 	@Override
 	@Before
@@ -58,4 +58,5 @@ public class AdminControllerTest extends PatientTest {
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, content);
 	}
+	
 }

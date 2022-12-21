@@ -1,4 +1,4 @@
-package com.spring.demo;
+package com.spring.demo.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -10,9 +10,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.spring.demo.AbstractTest;
 import com.spring.demo.domain.Patient;
 
-public class PatientServiceControllerTest extends PatientTest{
+public class PatientServiceControllerTest extends AbstractTest{
 
 	@Override
 	@Before
