@@ -3,7 +3,10 @@ package com.spring.demo.controller;
 import java.util.List;
 import java.util.Optional;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.demo.domain.Patient;
+import com.spring.demo.exception.PatientNotFoundException;
 import com.spring.demo.service_impl.PatientServiceImpl;
 
 import jakarta.validation.Valid;
@@ -23,31 +27,38 @@ import jakarta.validation.constraints.Positive;
 @RequestMapping(value = "/patient")
 public class PatientController {
 
+	private static final Logger logger = LoggerFactory.getLogger(PatientController.class);
+
 	@Autowired
 	private PatientServiceImpl patientServiceImpl;
 
 	@GetMapping(value = "/all")
-	public List<Patient> getAllPatient() {
+	public ResponseEntity<Object> getAllPatient() {
 		return patientServiceImpl.getAllPatients();
 	}
 
 	@GetMapping(value = "/find/{id}")
-	public Optional<Patient> findById(@PathVariable @Positive Long id) {
+	public ResponseEntity<Object> findById(@PathVariable @Positive Long id) throws PatientNotFoundException {
 		return patientServiceImpl.findById(id);
 	}
 
 	@PostMapping(value = "/add")
-	public Patient insertPatient(@RequestBody @Valid Patient patient) {
+	public ResponseEntity<Object> insertPatient(@RequestBody @Valid Patient patient) {
 		return patientServiceImpl.insertPatient(patient);
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public Patient updatePatient(@RequestBody @Valid Patient patient, @PathVariable @Positive Long id) {
+	public ResponseEntity<Object> updatePatient(@RequestBody @Valid Patient patient, @PathVariable @Positive Long id) {
 		return patientServiceImpl.updatePatient(patient, id);	
 	}
 
 	@DeleteMapping(value = "/delete/{id}")
-	public void deletePatient(@PathVariable @Positive Long id) {
-		patientServiceImpl.deletePatient(id);
+	public ResponseEntity<Object> deletePatient(@PathVariable @Positive Long id) {
+		return patientServiceImpl.deletePatient(id);
 	}
+
+	//	@PutMapping(value = "/{doctorId}/assign/{patientId}")
+	//  public Doctor assignPatients(@PathVariable Long doctorId, @PathVariable Long patientId) {
+	//      return doctorServiceImpl.assignPatients(doctorId, patientId);
+	//  }
 }

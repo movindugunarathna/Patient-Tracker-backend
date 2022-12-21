@@ -2,11 +2,14 @@ package com.spring.demo.service_impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.demo.domain.Doctor;
 import com.spring.demo.domain.Medicine;
+import com.spring.demo.domain.Patient;
 import com.spring.demo.repository.MedicineRepository;
 import com.spring.demo.service.MedicineService;
 

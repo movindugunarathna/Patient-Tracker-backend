@@ -55,17 +55,4 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.deleteById(id);
     }
 
-	public Doctor assignPatients(Long doctorId, Long patientId) {
-		
-		Set<Patient> patientSet = null;
-		
-		Doctor doc = doctorRepository.findById(doctorId).get();
-		Patient patient = patientRepository.findById(patientId).get();
-		
-		patientSet = doc.getPatientList();
-		patientSet.add(patient);
-		doc.setPatientList(patientSet);
-		return doctorRepository.save(doc);
-		
-	}
 }

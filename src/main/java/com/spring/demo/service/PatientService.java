@@ -3,18 +3,21 @@ package com.spring.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
+
 import com.spring.demo.domain.Patient;
+import com.spring.demo.exception.PatientNotFoundException;
 
 public interface PatientService {
 
-	public Optional<Patient> findById(Long id);
+	public ResponseEntity<Object> findById(Long id) throws PatientNotFoundException;
 
-	public Patient insertPatient(Patient patient);
+	public ResponseEntity<Object> insertPatient(Patient patient);
 
-	public Patient updatePatient(Patient patient, Long id);
+	public ResponseEntity<Object> updatePatient(Patient patient, Long id);
 
-	public void deletePatient(Long id);
+	public ResponseEntity<Object> deletePatient(Long id);
 
-	List<Patient> getAllPatients();
+	ResponseEntity<Object> getAllPatients();
 
 }
