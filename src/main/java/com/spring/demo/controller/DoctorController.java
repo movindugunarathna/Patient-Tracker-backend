@@ -45,5 +45,6 @@ public class DoctorController {
     public Doctor updateDoctor(@RequestBody Doctor updateDoctor, @PathVariable Long id) {
         return doctorServiceImpl.updateDoctor(updateDoctor, id);
     }
+    
 
 }

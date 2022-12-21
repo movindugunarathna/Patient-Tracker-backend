@@ -6,9 +6,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -21,9 +24,9 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	@Column(name = "patient_name", nullable = false, length = 512, unique = true)
-	@NotBlank(message = "Patient name cannot be blank")
-	private String patient;
+	//	@Column(name = "patient_name", nullable = false, length = 512, unique = true)
+	//	@NotBlank(message = "Patient name cannot be blank")
+	//	private String name;
 
 	@Column(name = "cost", nullable = false, length = 512)
 	@NotNull(message = "Cost cannot be blank")
@@ -38,20 +41,24 @@ public class Bill {
 	@NotNull(message = "Bill date cannot be blank")
 	private Date billDate;
 
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "Patient_id")
+	Patient patient;
+
 	public Bill() {
 		super();
 	}
 
-	public Bill(long id, @NotBlank(message = "Patient name cannot be blank") String patient,
+	public Bill(long id,
 			@NotNull(message = "Cost cannot be blank") double cost,
 			@NotNull(message = "Notes cannot be blank") String notes,
-			@NotNull(message = "Bill date cannot be blank") Date billDate) {
+			@NotNull(message = "Bill date cannot be blank") Date billDate, Patient patient) {
 		super();
 		this.id = id;
-		this.patient = patient;
 		this.cost = cost;
 		this.notes = notes;
 		this.billDate = billDate;
+		this.patient = patient;
 	}
 
 	public long getId() {
@@ -60,14 +67,6 @@ public class Bill {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getPatient() {
-		return patient;
-	}
-
-	public void setPatient(String patient) {
-		this.patient = patient;
 	}
 
 	public double getCost() {
@@ -92,6 +91,14 @@ public class Bill {
 
 	public void setBillDate(Date billDate) {
 		this.billDate = billDate;
+	}
+
+	public Patient getPatient() {
+		return patient;
+	}
+
+	public void setPatient(Patient patient) {
+		this.patient = patient;
 	}
 
 }

@@ -1,5 +1,9 @@
 package com.spring.demo.domain;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -29,12 +33,22 @@ public class Doctor {
 
 	@OneToOne(mappedBy = "doctor")
 	private Prescription prescription;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "doctors_patients",
+            joinColumns = {
+                    @JoinColumn(name = "doctor_id", 
+                            nullable = false, updatable = false)},
+            inverseJoinColumns = {
+                    @JoinColumn(name = "patient_id", 
+                            nullable = false, updatable = false)})
+	private Set<Patient> patientList;
 
 	public Doctor() {
 	}
 
 	public Doctor(long doctorId, String firstName, String lastName, String nicNumber, String gender,
-			String contactNumber, String specialization) {
+			String contactNumber, String specialization, Prescription prescription, Set<Patient> patientList) {
 		super();
 		this.doctorId = doctorId;
 		this.firstName = firstName;
@@ -43,6 +57,8 @@ public class Doctor {
 		this.gender = gender;
 		this.contactNumber = contactNumber;
 		this.specialization = specialization;
+		this.prescription = prescription;
+		this.patientList = patientList;
 	}
 
 	public long getDoctorId() {
@@ -108,4 +124,13 @@ public class Doctor {
 	public void setPrescription(Prescription prescription) {
 		this.prescription = prescription;
 	}
+
+	public Set<Patient> getPatientList() {
+		return patientList;
+	}
+
+	public void setPatientList(Set<Patient> patientList) {
+		this.patientList = patientList;
+	}
+
 }
