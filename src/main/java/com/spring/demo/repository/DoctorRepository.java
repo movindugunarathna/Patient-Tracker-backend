@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 @Repository("doctorRepository")
 public interface DoctorRepository extends JpaRepository<Doctor, Long> {
 
+    //test case01
+	Optional<Doctor> findByFirstName(String firstName);
+
 }

@@ -32,4 +32,9 @@ public class ExceptionHandeling implements ErrorController{
 		return createHttpResponse(HttpStatus.BAD_REQUEST,adminNotFoundException.getMessage());
 
 	}
+
+	@ExceptionHandler(value = DoctorNotFoundException.class)
+	public ResponseEntity<Object> exception(DoctorNotFoundException exception){
+		return new ResponseEntity<>("Doctor Not Found", HttpStatus.NOT_FOUND);
+	}
 }
