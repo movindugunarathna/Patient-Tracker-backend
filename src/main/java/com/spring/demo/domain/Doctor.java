@@ -33,15 +33,11 @@ public class Doctor {
 
 	@OneToOne(mappedBy = "doctor")
 	private Prescription prescription;
-	
+
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(name = "doctors_patients",
-            joinColumns = {
-                    @JoinColumn(name = "doctor_id", 
-                            nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "patient_id", 
-                            nullable = false, updatable = false)})
+	@JoinTable(name = "doctors_patients", joinColumns = {
+			@JoinColumn(name = "doctor_id", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "patient_id", nullable = false, updatable = false) })
 	private Set<Patient> patientList;
 
 	public Doctor() {
