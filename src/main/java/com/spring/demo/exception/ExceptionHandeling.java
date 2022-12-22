@@ -25,4 +25,11 @@ public class ExceptionHandeling implements ErrorController{
         return new ResponseEntity<HttpResponse>(new HttpResponse(httpStatus.value(), httpStatus,
                 httpStatus.getReasonPhrase().toUpperCase(), message.toUpperCase()), httpStatus);
     }
+
+	
+	@ExceptionHandler(AdminNotFoundException.class)
+	public ResponseEntity<HttpResponse> adminNotFoundException(AdminNotFoundException adminNotFoundException){
+		return createHttpResponse(HttpStatus.BAD_REQUEST,adminNotFoundException.getMessage());
+
+	}
 }
