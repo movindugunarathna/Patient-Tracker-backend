@@ -50,7 +50,7 @@ public class ClerkServiceControllerTest extends ClerkTest{
 				.content(inputJson)).andReturn();
 
 		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
+		assertEquals(201, status);
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, content);
 	}
