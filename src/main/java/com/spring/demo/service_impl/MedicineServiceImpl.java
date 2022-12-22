@@ -13,7 +13,10 @@ import com.spring.demo.domain.Patient;
 import com.spring.demo.repository.MedicineRepository;
 import com.spring.demo.service.MedicineService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class MedicineServiceImpl implements MedicineService{
 
 	@Autowired

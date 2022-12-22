@@ -10,7 +10,10 @@ import com.spring.demo.domain.Bill;
 import com.spring.demo.repository.BillRepository;
 import com.spring.demo.service.BillService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class BillServiceImpl implements BillService{
 
 	@Autowired

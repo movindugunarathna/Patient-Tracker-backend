@@ -22,19 +22,6 @@ public class PatientServiceControllerTest extends AbstractTest{
 	}
 	
 	@Test
-	public void getPatientList() throws Exception {
-		String uri = "/patient/all";
-		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
-				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
-
-		int status = mvcResult.getResponse().getStatus();
-		assertEquals(200, status);
-		String content = mvcResult.getResponse().getContentAsString();
-		Patient[] patientlist = super.mapFromJson(content, Patient[].class);
-		assertTrue(patientlist.length > 0);
-	}
-	
-	@Test
 	public void createPatient() throws Exception {
 		String uri = "/patient/add";
 		Patient patient = new Patient();
@@ -56,6 +43,20 @@ public class PatientServiceControllerTest extends AbstractTest{
 		String content = mvcResult.getResponse().getContentAsString();
 		assertEquals(content, content);
 	}
+	
+	@Test
+	public void getPatientList() throws Exception {
+		String uri = "/patient/all";
+		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
+
+		int status = mvcResult.getResponse().getStatus();
+		assertEquals(200, status);
+		String content = mvcResult.getResponse().getContentAsString();
+		Patient[] patientlist = super.mapFromJson(content, Patient[].class);
+		assertTrue(patientlist.length > 0);
+	}
+	
 	@Test
 	public void updatePatient() throws Exception {
 		String uri = "/patient/update/1";

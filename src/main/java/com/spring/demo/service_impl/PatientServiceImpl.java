@@ -15,7 +15,10 @@ import com.spring.demo.exception.PatientNotFoundException;
 import com.spring.demo.repository.PatientRepository;
 import com.spring.demo.service.PatientService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class PatientServiceImpl implements PatientService {
 
 	private static final Logger logger = LoggerFactory.getLogger(PatientServiceImpl.class);
