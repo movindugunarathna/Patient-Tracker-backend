@@ -16,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.spring.demo.domain.Clerk;
 import com.spring.demo.service.ClerkService;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
+
 @RestController
 @RequestMapping(value = "/clerk")
 public class ClerkController {
@@ -23,7 +26,7 @@ public class ClerkController {
    private ClerkService clerkService;
    
    @PostMapping(value = "/add")
-   public Clerk addClerk(@RequestBody Clerk clerk){
+   public Clerk addClerk(@RequestBody @Valid Clerk clerk){
       return clerkService.addClerk(clerk);
    }
 
@@ -33,17 +36,17 @@ public class ClerkController {
    }
 
    @GetMapping(value = "/get/{clerkID}")
-   public Optional<Clerk> getClerk(@PathVariable("clerkID") long clerkID){
+   public Optional<Clerk> getClerk(@PathVariable("clerkID") @Positive long clerkID){
       return clerkService.getAClerk(clerkID);
    }
 
    @PutMapping(value = "/update/{clerkID}")
-   public Clerk updateClerk(@PathVariable("clerkID") long clerkID, @RequestBody Clerk clerk){
+   public Clerk updateClerk(@PathVariable("clerkID") @Positive long clerkID, @RequestBody @Valid Clerk clerk){
       return clerkService.updateClerk(clerkID, clerk);
    }
 
    @DeleteMapping(value = "/delete/{clerkID}")
-   public Boolean deleteClerk(@PathVariable("clerkID") long clerkID){
+   public Boolean deleteClerk(@PathVariable("clerkID") @Positive long clerkID){
       return clerkService.deleteClerk(clerkID);
    }
 }
