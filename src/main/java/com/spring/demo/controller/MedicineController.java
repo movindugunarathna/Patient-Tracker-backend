@@ -9,13 +9,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.spring.demo.domain.Doctor;
 import com.spring.demo.domain.Medicine;
 import com.spring.demo.repository.MedicineRepository;
 import com.spring.demo.service.MedicineService;
-import com.spring.demo.service.MedicineServiceImpl;
+import com.spring.demo.service_impl.MedicineServiceImpl;
+
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Positive;
 
 @RestController
 @RequestMapping(value = "/medicine")
@@ -30,22 +35,23 @@ public class MedicineController {
 	}
 
 	@GetMapping(value = "/find/{serial}")
-	public Optional<Medicine> findById(@PathVariable Long serial) {
+	public Optional<Medicine> findById(@PathVariable @Positive Long serial) {
 		return medicineServiceImpl.findById(serial);
 	}
 
 	@PostMapping(value = "/add")
-	public Medicine insertMed(Medicine medicine) {
+	public Medicine insertMed(@RequestBody @Valid Medicine medicine) {
 		return medicineServiceImpl.insertMed(medicine);
 	}
 
 	@PutMapping(value = "/update/{serial}")
-	public Medicine updateMed(Medicine medicine, @PathVariable Long serial) {
+	public Medicine updateMed(@RequestBody @Valid Medicine medicine, @PathVariable @Positive Long serial) {
 		return medicineServiceImpl.updateMed(medicine, serial);	
 	}
 
 	@DeleteMapping(value = "/delete/{serial}")
-	public void deleteMed(@PathVariable Long serial) {
+	public void deleteMed(@PathVariable @Positive Long serial) {
 		medicineServiceImpl.deleteMed(serial);
 	}
+
 }

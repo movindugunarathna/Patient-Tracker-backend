@@ -1,13 +1,17 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.spring.demo.domain.Doctor;
 import com.spring.demo.domain.Medicine;
+import com.spring.demo.domain.Patient;
 import com.spring.demo.repository.MedicineRepository;
+import com.spring.demo.service.MedicineService;
 
 @Service
 public class MedicineServiceImpl implements MedicineService{
@@ -35,6 +39,7 @@ public class MedicineServiceImpl implements MedicineService{
 		Optional<Medicine> med = medicineRepository.findById(serial);
 
 		if(med != null) {
+			medicine.setSerialNumber(serial);
 			return medicineRepository.save(medicine);
 		}
 		return null;

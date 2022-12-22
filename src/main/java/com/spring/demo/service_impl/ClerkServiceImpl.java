@@ -1,4 +1,4 @@
-package com.spring.demo.service;
+package com.spring.demo.service_impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,37 +6,38 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.spring.demo.domain.Clerk1;
-import com.spring.demo.repository.Cler1kRepository;
+import com.spring.demo.domain.Clerk;
+import com.spring.demo.repository.ClerkRepository;
+import com.spring.demo.service.ClerkService;
 
 @Service
 public class ClerkServiceImpl implements ClerkService{
     @Autowired
-    private Cler1kRepository clerkRepository;
+    private ClerkRepository clerkRepository;
 
     //save clerk
     @Override
-    public Clerk1 addClerk(Clerk1 clerk){
+    public Clerk addClerk(Clerk clerk){
         return this.clerkRepository.save(clerk);
     }    
 
     //get a clerk
     @Override
-    public Optional<Clerk1> getAClerk(long clerkID){
+    public Optional<Clerk> getAClerk(long clerkID){
         // return clerkRepository.findByClerkID(clerkID).get(0);
         return clerkRepository.findById(clerkID);
     }
 
     //get All Clerks
     @Override
-    public List<Clerk1> getAllClerks(){
+    public List<Clerk> getAllClerks(){
         return clerkRepository.findAll();
     }
 
     //update clerk
     @Override
-    public Clerk1 updateClerk(long clerkID, Clerk1 clerk){
-        Clerk1 returnClerk = clerkRepository.findByClerkID(clerkID).get(0);
+    public Clerk updateClerk(long clerkID, Clerk clerk){
+        Clerk returnClerk = clerkRepository.findByClerkID(clerkID).get(0);
         if(returnClerk != null){
             clerk.setClerkID(clerkID);
             return clerkRepository.save(clerk);
