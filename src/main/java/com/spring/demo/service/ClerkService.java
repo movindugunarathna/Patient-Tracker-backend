@@ -1,7 +1,8 @@
 package com.spring.demo.service;
 
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.http.ResponseEntity;
 
 import com.spring.demo.domain.Clerk;
 
@@ -11,7 +12,7 @@ public interface ClerkService {
     public Clerk addClerk(Clerk clerk);   
 
     //get a clerk
-    public Optional<Clerk> getAClerk(long clerkID);
+    public ResponseEntity<Object> getAClerk(long clerkID);
 
     //get All Clerks
     public List<Clerk> getAllClerks();
