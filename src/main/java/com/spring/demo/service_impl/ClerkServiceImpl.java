@@ -11,6 +11,7 @@ import com.spring.demo.repository.ClerkRepository;
 import com.spring.demo.service.ClerkService;
 
 @Service
+// @Transactional
 public class ClerkServiceImpl implements ClerkService{
     @Autowired
     private ClerkRepository clerkRepository;

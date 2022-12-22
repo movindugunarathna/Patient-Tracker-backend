@@ -6,6 +6,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "Clerk")
@@ -14,21 +16,28 @@ public class Clerk {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long clerkID;
 
+    @NotBlank(message = "Firstname is mandatory")
     @Column(name = "FirstName")
     private String firstName;
     
+    @NotBlank(message = "Lasttname is mandatory")
     @Column(name = "lastName")
     private String lastName;
 
+    @NotBlank(message = "Age is mandatory")
     @Column(name = "age")
     private String age;
 
+    @NotBlank(message = "Gender is mandatory")
     @Column(name = "gender")
     private String gender;
 
+    @Pattern(regexp = "^\\d{10}$", message = "Please Enter Valid Phone Number")
+    @NotBlank(message = "Contact Number is mandatory")
     @Column(name = "contactNo")
     private String contactNo;
 
+    @NotBlank(message = "Department is mandatory")
     @Column(name = "department")
     private String department;
 

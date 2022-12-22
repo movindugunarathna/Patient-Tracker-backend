@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
@@ -18,6 +19,7 @@ public class ClerkServiceControllerTest extends ClerkTest{
 		super.setUp();
 	}
 	
+	//get all clerks test case============================================================
 	@Test
 	public void getAllClerks() throws Exception {
 		String uri = "/clerk/getAll";
@@ -30,7 +32,8 @@ public class ClerkServiceControllerTest extends ClerkTest{
 		Clerk[] clerkList = super.mapFromJson(content, Clerk[].class);
 		assertTrue(clerkList.length > 0);
 	}
-	
+
+	//add a clerk test case ===============================================================
 	@Test
 	public void addClerk() throws Exception {
 		String uri = "/clerk/add";
@@ -53,11 +56,20 @@ public class ClerkServiceControllerTest extends ClerkTest{
 		assertEquals(content, content);
 	}
 
+	//update a clerk test case ============================================================
+	@Ignore
 	@Test
 	public void updateClerk() throws Exception {
-		String uri = "/clerk/update/1";
+		String uri = "/clerk/update/6";
+
 		Clerk clerk = new Clerk();
 		clerk.setFirstName("Maneesha Updated");
+		clerk.setLastName("Lakshani Updated");
+		clerk.setFirstName("Maneesha Updated");
+		clerk.setDepartment("Department Updated");
+		clerk.setAge("Age Updated");
+		clerk.setContactNo("ContactNo Updated");
+
 		String inputJson = super.mapToJson(clerk);
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
 				.contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -69,6 +81,7 @@ public class ClerkServiceControllerTest extends ClerkTest{
 		assertEquals(content, content);
 	}
 
+	//delete a clerk test case ============================================================
 	@Test
 	public void deleteClerk() throws Exception {
 		String uri = "/clerk/delete/6";
