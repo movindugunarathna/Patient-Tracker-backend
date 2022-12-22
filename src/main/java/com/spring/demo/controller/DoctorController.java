@@ -14,7 +14,7 @@ import java.util.Optional;
 @RequestMapping(value = "/doctor")
 public class DoctorController {
 
-     @Autowired
+       @Autowired
     private DoctorRepository doctorRepo;
     
     @Autowired
@@ -36,80 +36,35 @@ public class DoctorController {
     	return new ResponseEntity<>("Doctor added successfully", HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/list/{doctorID}", method=RequestMethod.GET)
-    public ResponseEntity<Doctor> getDoctorById(@PathVariable("doctorID") Long doctorID) {
+    @RequestMapping(value = "/list/{doctorId}", method=RequestMethod.GET)
+    public ResponseEntity<Doctor> getDoctorById(@PathVariable("doctorId") Long doctorId) {
         logger.info("Inside Class!!!!!!!! DoctorController, method!!!!! :  getDoctorById");
         
-        Doctor doc= doctorRepo.findById(doctorID).orElseThrow(()-> new DoctorNotFoundException());
+        Doctor doc= doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
        // if(!doctorService.containsKey(doctorId)) throw new DoctorNotFoundException(;)
         //return new ResponseEntity<Doctor>(doctorService.getDoctorById(doctorID), HttpStatus.OK);
         return ResponseEntity.ok().body(doc);
     }
     
-    @RequestMapping(value = "/delete/{doctorID}", method = RequestMethod.DELETE)
-    public ResponseEntity<Object> deleteDoctor(@PathVariable("doctorID") Long doctorID) {
+    @RequestMapping(value = "/delete/{doctorId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteDoctor(@PathVariable("doctorId") Long doctorId) {
         logger.info("Inside class!!!!!!!! DoctorController, method!!!! : delete");
         
-        Doctor doc = doctorRepo.findById(doctorID).orElseThrow(()-> new DoctorNotFoundException());
+        Doctor doc = doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
         		
-        doctorService.deleteDoctor(doctorID);
-        //return new ResponseEntity<>("Doctor deleted successsfully", HttpStatus.OK);
+        doctorService.deleteDoctor(doctorId);
+        return new ResponseEntity<>("Doctor deleted successsfully", HttpStatus.OK);
+      
+    }
+    
+    @RequestMapping(value = "/update/{doctorId}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateDoctor(@PathVariable("doctorId") Long doctorId, @RequestBody Doctor doctor) {
+        logger.info("Inside class!!!!!!!! DoctorController, method!!!! : updateAdmin");
+        	Doctor doc = doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
+        	
+        doctorService.updateDoctor(doctorId,doctor);
+        return new ResponseEntity<>("Doctor is updated successsfully", HttpStatus.OK);
         
-        return ResponseEntity.ok().body("Doctor with Id "+doctorID+" DELETED");
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /*@Autowired
-    private DoctorServiceImpl doctorServiceImpl;
-
-    @GetMapping(value = "/list")
-    public List<Doctor> fetchAll() {
-        return doctorServiceImpl.getAllDoctors();
-    }
-
-    @PostMapping(value = "/add")
-    public Doctor doctor(@RequestBody Doctor d) {
-        return doctorServiceImpl.createNewDoctor(d);
-    }
-
-    @GetMapping(value = "/find/{id}")
-    public Optional<Doctor> findById(@PathVariable Long id) {
-        return doctorServiceImpl.findById(id);
-    }
-
-    @DeleteMapping(value = "/remove/{id}")
-    public boolean deleteById(@PathVariable Long id) {
-        try {
-            doctorServiceImpl.removeDoctor(id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @PutMapping(value = "/update/{id}")
-    public Doctor updateDoctor(@RequestBody Doctor updateDoctor, @PathVariable Long id) {
-        return doctorServiceImpl.updateDoctor(updateDoctor, id);
-    }
-    */
 
 }
