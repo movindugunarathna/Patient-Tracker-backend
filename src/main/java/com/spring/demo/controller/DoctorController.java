@@ -47,9 +47,7 @@ public class DoctorController {
     }
     
 	@PutMapping(value = "/{doctorId}/assign/{patientId}")
-	  public Doctor assignPatients(@PathVariable Long doctorId, @PathVariable Long patientId) {
-	      return doctorServiceImpl.assignPatients(doctorId, patientId);
-	  }
-    
-
+	public Doctor assignPatients(@PathVariable Long doctorId, @PathVariable Long patientId) {
+		return doctorServiceImpl.assignPatients(doctorId, patientId);
+	}
 }

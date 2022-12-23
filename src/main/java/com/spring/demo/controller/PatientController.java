@@ -53,5 +53,5 @@ public class PatientController {
 	public ResponseEntity<Object> deletePatient(@PathVariable @Positive Long id) {
 		return patientServiceImpl.deletePatient(id);
 	}
-
+	
 }

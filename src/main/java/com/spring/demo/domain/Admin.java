@@ -6,18 +6,17 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 
 @Entity
-@Table(name = "ADMIN")
 public class Admin {
 	@Id
 	@NotNull(message = "Please enter ID")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long adminId;
 
-	@Column(name = "FIRSTNAME", nullable = false)
+	@Column(name = "FIRST_NAME", nullable = false)
 	@NotBlank(message = "Please enter first name")
 	private String firstName;
 
-	@Column(name = "LASTNAME", nullable = false)
+	@Column(name = "LAST_NAME", nullable = false)
 	@NotBlank(message = "Please enter last name")
 	private String lastName;
 
@@ -29,9 +28,9 @@ public class Admin {
 	@NotBlank(message = "Please enter gender")
 	private String gender;
 
-	@Column(name = "CONTACTNUMBER", nullable = false)
+	@Column(name = "CONTACT_NUMBER", nullable = false)
 	@NotBlank(message = "Please enter contact number")
-	@Pattern(regexp = "^\\d{10}$", message = "Contact number must be a numeric value with 10 digits")
+	@Pattern(regexp = "^[0-9]*$", message = "Contact number must be a numeric value")
 	private String contactNumber;
 
 	@Column(name = "PASSWORD", nullable = false)

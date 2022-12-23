@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -31,23 +32,23 @@ public class PrescriptionController {
 	}
 
 	@GetMapping(value = "/find/{id}")
-	public Optional<Prescription> findById(@PathVariable @Positive Long id) {
+	public ResponseEntity<Object> findById(@PathVariable @Positive Long id) {
 		return prescriptionServiceImpl.findById(id);
 	}
 
 	@PostMapping(value = "/add")
-	public Prescription insertPrescription(@RequestBody @Valid Prescription prescription) {
+	public ResponseEntity<Object> insertPrescription(@RequestBody @Valid Prescription prescription) {
 		return prescriptionServiceImpl.createPrescription(prescription);
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public Prescription updatePrescription(@RequestBody @Valid Prescription prescription,
+	public ResponseEntity<Object> updatePrescription(@RequestBody @Valid Prescription prescription,
 			@PathVariable @Positive Long id) {
 		return prescriptionServiceImpl.updatePrescription(prescription, id);
 	}
 
 	@DeleteMapping(value = "/delete/{id}")
-	public void deletePrescription(@PathVariable @Positive Long id) {
-		prescriptionServiceImpl.deletePrescription(id);
+	public ResponseEntity<Object> deletePrescription(@PathVariable @Positive Long id) {
+		return prescriptionServiceImpl.deletePrescription(id);
 	}
 }

@@ -7,6 +7,8 @@ import com.spring.demo.repository.DoctorRepository;
 import com.spring.demo.repository.PatientRepository;
 import com.spring.demo.service.DoctorService;
 
+import jakarta.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +18,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
+@Transactional
 public class DoctorServiceImpl implements DoctorService {
 	
     @Autowired
