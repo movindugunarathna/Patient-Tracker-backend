@@ -10,44 +10,71 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
+
 @RestController
 @RequestMapping(value = "/doctor")
 public class DoctorController {
+
     @Autowired
-    private DoctorServiceImpl doctorServiceImpl;
-
-    @GetMapping(value = "/list")
-    public List<Doctor> fetchAll() {
-        return doctorServiceImpl.getAllDoctors();
-    }
-
-    @PostMapping(value = "/add")
-    public Doctor doctor(@RequestBody Doctor d) {
-        return doctorServiceImpl.createNewDoctor(d);
-    }
-
-    @GetMapping(value = "/find/{id}")
-    public Optional<Doctor> findById(@PathVariable Long id) {
-        return doctorServiceImpl.findById(id);
-    }
-
-    @DeleteMapping(value = "/remove/{id}")
-    public boolean deleteById(@PathVariable Long id) {
-        try {
-            doctorServiceImpl.removeDoctor(id);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    @PutMapping(value = "/update/{id}")
-    public Doctor updateDoctor(@RequestBody Doctor updateDoctor, @PathVariable Long id) {
-        return doctorServiceImpl.updateDoctor(updateDoctor, id);
+    private DoctorRepository doctorRepo;
+    
+    @Autowired
+    private DoctorService doctorService;
+    
+    static Logger logger = Logger.getLogger(DoctorController.class.getName());
+    
+    @RequestMapping(value="/list")
+    public ResponseEntity<List<Doctor>>getDoctor(){
+    	logger.info("Inside class!!!!!!!! DoctorController, method!!!! : getDoctorsList");
+    	return new ResponseEntity<List<Doctor>>(doctorService.getDoctor(),HttpStatus.OK);
     }
     
-	@PutMapping(value = "/{doctorId}/assign/{patientId}")
-	public Doctor assignPatients(@PathVariable Long doctorId, @PathVariable Long patientId) {
-		return doctorServiceImpl.assignPatients(doctorId, patientId);
-	}
+    @RequestMapping(value="/add", method = RequestMethod.POST)
+    public ResponseEntity<Object>createDoctor(@Valid @RequestBody Doctor doctor) {
+    	logger.info("Inside class!!!!!!!! DoctorController, method!!!! : createDoctor");
+    		//Doctor doc = doctorRepo.save(doc)
+    	doctorService.createDoctor(doctor);
+    	return new ResponseEntity<>("Doctor added successfully", HttpStatus.CREATED);
+    }
+
+    @RequestMapping(value = "/list/{doctorId}", method=RequestMethod.GET)
+    public ResponseEntity<Doctor> getDoctorById(@PathVariable("doctorId") Long doctorId) {
+        logger.info("Inside Class!!!!!!!! DoctorController, method!!!!! :  getDoctorById");
+        
+        Doctor doc= doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
+       // if(!doctorService.containsKey(doctorId)) throw new DoctorNotFoundException(;)
+        //return new ResponseEntity<Doctor>(doctorService.getDoctorById(doctorID), HttpStatus.OK);
+        return ResponseEntity.ok().body(doc);
+    }
+    
+    @RequestMapping(value = "/delete/{doctorId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Object> deleteDoctor(@PathVariable("doctorId") Long doctorId) {
+        logger.info("Inside class!!!!!!!! DoctorController, method!!!! : delete");
+        
+        Doctor doc = doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
+        		
+        doctorService.deleteDoctor(doctorId);
+        return new ResponseEntity<>("Doctor deleted successsfully", HttpStatus.OK);
+      
+    }
+    
+   /* @RequestMapping(value = "/update/{doctorId}", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateDoctor(@PathVariable("doctorId") Long doctorId, @RequestBody Doctor doctor) {
+        logger.info("Inside class!!!!!!!! DoctorController, method!!!! : updateAdmin");
+        	Doctor doc = doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
+        	
+        doctorService.updateDoctor(doctorId,doctor);
+        return new ResponseEntity<>("Doctor is updated successsfully", HttpStatus.OK);
+        
+    }*/
+    
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateDoctor( @RequestBody Doctor doctor) {
+        logger.info("Inside class!!!!!!!! DoctorController, method!!!! : updateAdmin");
+        	
+        doctorService.updateDoctor(doctor);
+        return new ResponseEntity<>("Doctor is updated successsfully", HttpStatus.OK);
+        
+    }
+    
 }
