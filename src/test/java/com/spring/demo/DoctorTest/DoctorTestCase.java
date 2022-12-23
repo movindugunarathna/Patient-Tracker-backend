@@ -15,7 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.spring.demo.domain.Doctor;
 
 
-public class DoctorTestCase  extends DoctorTestController{
+public class DoctorTestCase  extends PatientTrackerBackendApplicationTests{
 
 	@Override
 	@Before
@@ -63,9 +63,11 @@ public class DoctorTestCase  extends DoctorTestController{
 	
 	@Test
 	public void updateDoctor() throws Exception{
-		String uri = "/doctor/update/9";
+		String uri = "/doctor/update";
 		
-		Doctor doc = new Doctor("John", "Bugg", "868745643V", "Male", "0779459345","Neurologist");
+		
+		
+		Doctor doc = new Doctor(5L, "John", "Bugg", "868745643V", "Male", "0779459345","Neurologist");
 		
 		String inputJson = super.mapToJson(doc);
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.put(uri)
@@ -80,7 +82,7 @@ public class DoctorTestCase  extends DoctorTestController{
 	
 	@Test
 	public void deleteDoctor() throws Exception{
-		String uri = "/doctor/delete/9";
+		String uri = "/doctor/delete/11";
 		
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)
 				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
@@ -95,7 +97,7 @@ public class DoctorTestCase  extends DoctorTestController{
 	
 	@Test
 	public void getDoctorById() throws Exception{
-		String uri ="/doctor/list/15";
+		String uri ="/doctor/list/8";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
 				.accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 		
@@ -103,7 +105,7 @@ public class DoctorTestCase  extends DoctorTestController{
 		assertEquals(200, status);
 		String content = mvcResult.getResponse().getContentAsString();
 		Doctor doctor = super.mapFromJson(content, Doctor.class);
-		assertEquals(doctor.getDoctorId(), 15);
+		assertEquals(doctor.getDoctorId(), 8);
 
 		}
 	
