@@ -16,7 +16,7 @@ public class ExceptionHandeling implements ErrorController {
 	}
 
 	@ExceptionHandler(UsernameExistException.class)
-	public ResponseEntity<HttpResponse> userNameExistException(PatientNotFoundException exception) {
+	public ResponseEntity<HttpResponse> userNameExistException(UsernameExistException exception) {
 		return createHttpResponse(HttpStatus.BAD_REQUEST, exception.getMessage());
 
 	}

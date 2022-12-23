@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.spring.demo.domain.Bill;
+import com.spring.demo.exception.BillNotFoundException;
 import com.spring.demo.service_impl.BillServiceImpl;
 
 import jakarta.validation.Valid;
@@ -31,33 +33,28 @@ public class BillController {
 	private BillServiceImpl billServiceImpl;
 	
 	@GetMapping(value = "/all")
-	public List<Bill> getAllBills() {
-		logger.info("Get all the bills.");
+	public ResponseEntity<Object> getAllBills() {
 		return billServiceImpl.getAllBills();
 	}
 
 	@GetMapping(value = "/find/{id}")
-	public Optional<Bill> findById(@PathVariable @Positive Long id) {
-		logger.info("Get bill by bill ID.");
+	public ResponseEntity<Object> findById(@PathVariable @Positive Long id) throws BillNotFoundException {
 		return billServiceImpl.findById(id);
 	}
 
 	@PostMapping(value = "/add")
-	public Bill insertBill(@RequestBody @Valid Bill bill) {
-		logger.info("New bill created.");
+	public ResponseEntity<Object> insertBill(@RequestBody @Valid Bill bill) {
 		return billServiceImpl.insertBill(bill);
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public Bill updateBill(@RequestBody @Valid Bill bill, @PathVariable @Positive Long id) {
-		logger.info("Update bill by bill ID.");
+	public ResponseEntity<Object> updateBill(@RequestBody @Valid Bill bill, @PathVariable @Positive Long id) throws BillNotFoundException {
 		return billServiceImpl.updateBill(bill, id);	
 	}
 
 	@DeleteMapping(value = "/delete/{id}")
-	public void deleteBill(@PathVariable @Positive Long id) {
-		logger.info("Delete bill by bill ID.");
-		billServiceImpl.deleteBill(id);
+	public ResponseEntity<Object> deleteBill(@PathVariable @Positive Long id) {
+		return billServiceImpl.deleteBill(id);
 	}
 	
 }

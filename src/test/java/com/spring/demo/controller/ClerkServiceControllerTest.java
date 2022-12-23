@@ -1,4 +1,4 @@
-package com.spring.demo.ClerkTests;
+package com.spring.demo.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -9,9 +9,10 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.spring.demo.AbstractTest;
 import com.spring.demo.domain.Clerk;
 
-public class ClerkServiceControllerTest extends ClerkTest{
+public class ClerkServiceControllerTest extends AbstractTest{
     @Override
 	@Before
 	public void setUp() {

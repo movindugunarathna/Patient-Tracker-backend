@@ -1,20 +1,20 @@
 package com.spring.demo.service;
 
-import java.util.List;
-import java.util.Optional;
+import org.springframework.http.ResponseEntity;
 
 import com.spring.demo.domain.Bill;
+import com.spring.demo.exception.BillNotFoundException;
 
 
 public interface BillService {
 
-	public List<Bill> getAllBills();
+	public ResponseEntity<Object> getAllBills();
 
-    public Optional<Bill> findById(Long id);
+    public ResponseEntity<Object> findById(Long id) throws BillNotFoundException;
 
-    public Bill insertBill(Bill bill);
+    public ResponseEntity<Object> insertBill(Bill bill);
 
-    public Bill updateBill(Bill bill, Long id);
+    public ResponseEntity<Object> updateBill(Bill bill, Long id) throws BillNotFoundException;
 
-    public void deleteBill(Long id);
+    public ResponseEntity<Object> deleteBill(Long id);
 }

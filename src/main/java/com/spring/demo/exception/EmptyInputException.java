@@ -1,4 +1,4 @@
-package com.spring.demo.exception.ClerkExceptions;
+package com.spring.demo.exception;
 
 public class EmptyInputException extends RuntimeException{
     
