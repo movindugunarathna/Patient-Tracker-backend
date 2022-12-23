@@ -3,17 +3,19 @@ package com.spring.demo.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.http.ResponseEntity;
+
 import com.spring.demo.domain.Medicine;
 
 public interface MedicineService {
 
     public List<Medicine> getAllMedicines();
 
-    public Optional<Medicine> findById(Long serial);
+    public ResponseEntity<Object> findById(Long serial);
 
-    public Medicine insertMed(Medicine medicine);
+    public ResponseEntity<Object> insertMed(Medicine medicine);
 
-    public Medicine updateMed(Medicine medicine, Long serial);
+    public ResponseEntity<Object> updateMed(Medicine medicine, Long serial);
 
-    public void deleteMed(Long serial);
+    public ResponseEntity<Object> deleteMed(Long serial);
 }
