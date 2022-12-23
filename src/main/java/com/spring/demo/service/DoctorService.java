@@ -1,19 +1,26 @@
 package com.spring.demo.service;
 
-import com.spring.demo.domain.Doctor;
-import com.spring.demo.domain.Medicine;
-
 import java.util.List;
-import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.spring.demo.domain.Doctor;
+import com.spring.demo.repository.DoctorRepository;
+
+import jakarta.validation.Valid;
 
 public interface DoctorService {
-    List<Doctor> getAllDoctors();
+	
+	public Doctor getDoctorById(Long doctorID);
+	
+	public List<Doctor> getDoctor();
 
-    Optional<Doctor> findById(Long id);
+	public Doctor createDoctor(Doctor doctor);
+	
+	public void deleteDoctor(Long doctorID);
 
-    Doctor createNewDoctor(Doctor doctor);
+	public Doctor updateDoctor(Doctor doctor);
 
-    Doctor updateDoctor(Doctor doctor, Long id);
+	
 
-    void removeDoctor(Long id);
 }

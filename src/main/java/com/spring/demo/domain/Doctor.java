@@ -9,27 +9,44 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "doctor")
 public class Doctor {
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long doctorId;
-
-	@Column(name = "FIRSTNAME")
-	private String firstName;
-
-	@Column(name = "LASTNAME")
-	private String lastName;
-
-	@Column(name = "NICNUMBER")
-	private String nicNumber;
-
-	@Column(name = "GENDER")
-	private String gender;
-
-	@Column(name = "CONTACTNUMBER")
-	private String contactNumber;
-
-	@Column(name = "SPECIALIZATION")
-	private String specialization;
+	    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long doctorId;
+    
+    @Column(name = "FIRSTNAME")
+    @NotBlank(message = "Mandatory")
+    @NotNull
+    @Size(min = 3, max = 20, message="Characters should be between 3 and 20")
+    private String firstName;
+    
+    @NotBlank(message = "Mandatory")
+    @Column(name = "LASTNAME")
+    @NotNull
+    @Size(min = 3, max = 20, message="Characters should be between 3 and 20")
+    private String lastName;
+    
+    @Column(name = "NICNUMBER")
+    @NotBlank(message = "Mandatory")
+    @NotNull
+    @Size(min = 9, max = 12, message="Characters should be between 9 and 12")
+  //  @Pattern(regexp = "^([0-9]{9}[x|X|v|V]|[0-9]{12})$")
+    private String nicNumber;
+    
+    @Column(name = "GENDER")
+    @NotNull
+    @NotBlank(message = "Mandatory")
+    private String gender;
+    
+    @Column(name = "CONTACTNUMBER")
+    @NotBlank(message = "Mandatory")
+    @NotNull
+    @Size(min = 10, max = 12, message="Characters should be between 10 and 12")
+    private String contactNumber;
+    
+    @Column(name = "SPECIALIZATION")
+    @NotBlank(message = "Mandatory")
+    @NotNull
+    private String specialization;
 
 	@OneToOne(mappedBy = "doctor")
 	private Prescription prescription;

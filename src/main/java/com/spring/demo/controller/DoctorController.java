@@ -57,12 +57,11 @@ public class DoctorController {
       
     }
     
-    @RequestMapping(value = "/update/{doctorId}", method = RequestMethod.PUT)
-    public ResponseEntity<Object> updateDoctor(@PathVariable("doctorId") Long doctorId, @RequestBody Doctor doctor) {
+    @RequestMapping(value = "/update", method = RequestMethod.PUT)
+    public ResponseEntity<Object> updateDoctor( @RequestBody Doctor doctor) {
         logger.info("Inside class!!!!!!!! DoctorController, method!!!! : updateAdmin");
-        	Doctor doc = doctorRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException());
         	
-        doctorService.updateDoctor(doctorId,doctor);
+        doctorService.updateDoctor(doctor);
         return new ResponseEntity<>("Doctor is updated successsfully", HttpStatus.OK);
         
     }

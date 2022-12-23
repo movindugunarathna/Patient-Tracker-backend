@@ -1,58 +1,63 @@
 package com.spring.demo.service_impl;
 
-import com.spring.demo.domain.Doctor;
-import com.spring.demo.domain.Medicine;
-import com.spring.demo.domain.Patient;
-import com.spring.demo.repository.DoctorRepository;
-import com.spring.demo.repository.PatientRepository;
-import com.spring.demo.service.DoctorService;
+import java.util.List;
 
+import org.jboss.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 
-import javax.print.Doc;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import com.spring.demo.controller.DoctorController;
+import com.spring.demo.domain.Doctor;
+import com.spring.demo.exception.DoctorNotFoundException;
+import com.spring.demo.repository.DoctorRepository;
+import com.spring.demo.service.DoctorService;
+
+import jakarta.validation.Valid;
 
 @Service
 public class DoctorServiceImpl implements DoctorService {
 	
-    @Autowired
-    DoctorRepository doctorRepository;
-    
-    @Autowired
-    PatientRepository patientRepository;
+		@Autowired
+		DoctorRepository docRepo;
+		
+		static Logger logger = Logger.getLogger(DoctorController.class.getName());
+		
+		public Doctor getDoctorById(@PathVariable("doctorId") Long doctorID) {
+			logger.info("DoctorServiceImple");
+			
+			return docRepo.findById(doctorID).orElseThrow(()-> new DoctorNotFoundException("Doctor Not Found"));
+		}
+		
+		
+		public List<Doctor> getDoctor(){
+			logger.info("DoctorServiceImpl");
+			
+			return docRepo.findAll();
+		}
 
-    @Override
-    public List<Doctor> getAllDoctors() {
-        return doctorRepository.findAll();
-    }
+		public Doctor createDoctor(@Valid @RequestBody Doctor doctor) {
+			logger.info("DoctorServiceImpl");
+			
+			return docRepo.save(doctor);
+		}
+		
+		public void deleteDoctor(@PathVariable("doctorId") Long doctorId) {
+			logger.info("DoctorServiceImpl");
+			
+			docRepo.findById(doctorId).orElseThrow(()-> new DoctorNotFoundException("Doctor Not Found"));
+			docRepo.deleteById(doctorId);
+		}
+		
+		
 
-    @Override
-    public Optional<Doctor> findById(Long id) {
-        return doctorRepository.findById(id);
-    }
-
-    @Override
-    public Doctor createNewDoctor(Doctor doctor) {
-        return doctorRepository.save(doctor);
-    }
-
-    @Override
-    public Doctor updateDoctor(Doctor doctor, Long id) {
-        Optional<Doctor> findDoctor = doctorRepository.findById(id);
-
-        Doctor updatedDoctor = null;
-        if (findDoctor.isPresent()) {
-            updatedDoctor = doctorRepository.save(doctor);
-        }
-        return updatedDoctor;
-    }
-
-    @Override
-    public void removeDoctor(Long id) {
-        doctorRepository.deleteById(id);
-    }
+		public Doctor updateDoctor(Doctor doctor) {
+			logger.info("DoctorServiceImpl");
+			
+			docRepo.findById(doctor.getDoctorId()).orElseThrow(()-> new DoctorNotFoundException("Doctor Not Found"));
+			
+			return docRepo.save(doctor);
+		}
 
 }
