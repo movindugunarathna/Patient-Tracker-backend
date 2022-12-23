@@ -10,11 +10,11 @@ import com.spring.demo.exception.PatientNotFoundException;
 
 public interface PatientService {
 
-	public ResponseEntity<Object> findById(Long id) throws PatientNotFoundException;
+	public ResponseEntity<Object> findById(Long id) throws Exception;
 
 	public ResponseEntity<Object> insertPatient(Patient patient);
 
-	public ResponseEntity<Object> updatePatient(Patient patient, Long id);
+	public ResponseEntity<Object> updatePatient(Patient patient, Long id) throws PatientNotFoundException;
 
 	public ResponseEntity<Object> deletePatient(Long id);
 

@@ -24,10 +24,6 @@ public class Bill {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
 
-	//	@Column(name = "patient_name", nullable = false, length = 512, unique = true)
-	//	@NotBlank(message = "Patient name cannot be blank")
-	//	private String name;
-
 	@Column(name = "cost", nullable = false, length = 512)
 	@NotNull(message = "Cost cannot be blank")
 	private double cost;
