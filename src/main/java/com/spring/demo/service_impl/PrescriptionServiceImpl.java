@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.demo.domain.Doctor;
 import com.spring.demo.domain.Prescription;
+import com.spring.demo.exception.PrescriptionNotFoundException;
 import com.spring.demo.repository.Prescriptionrepository;
 import com.spring.demo.service.PrescriptionService;
 
@@ -27,13 +28,13 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
 	@Override
 	public List<Prescription> getAllPrescriptions() {
-		logger.info("Patient list retrieved");
+		logger.info("Prescription list retrieved");
 		return presRepository.findAll();
 	}
 
 	@Override
 	public ResponseEntity<Object> findById(Long id) {
-		Prescription findPrescription = presRepository.findById(id).get();
+		Prescription findPrescription = presRepository.findById(id).orElseThrow(()-> new PrescriptionNotFoundException());
 		logger.info("Get prescription by ID");
 		return new ResponseEntity<>(findPrescription, HttpStatus.OK);
 	}

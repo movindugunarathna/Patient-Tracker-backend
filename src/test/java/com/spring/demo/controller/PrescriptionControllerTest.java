@@ -4,7 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
@@ -13,6 +16,9 @@ import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import com.spring.demo.AbstractTest;
+import com.spring.demo.domain.Doctor;
+import com.spring.demo.domain.Medicine;
+import com.spring.demo.domain.Patient;
 import com.spring.demo.domain.Prescription;
 
 class PrescriptionControllerTest extends AbstractTest {
@@ -28,7 +34,35 @@ class PrescriptionControllerTest extends AbstractTest {
 		String uri = "/prescription/add";
 		Prescription prescription = new Prescription();
 		prescription.setPrescriptionId(1L);
-
+//		Patient patient = new Patient();
+//		patient.setPatientId(1);
+//		patient.setFirstName("Jayamith");
+//		patient.setLastName("Priyankara");
+//		patient.setUsername("Jay");
+//		patient.setAge("25");
+//		patient.setGender("Male");
+//		patient.setContactNumber("0786546325");
+//		patient.setNotes("Special Notes");
+//		prescription.setPatient(patient);
+//		
+//		Doctor doctor = new Doctor();
+//		doctor.setDoctorId(1L);
+//		doctor.setFirstName("John");
+//		doctor.setLastName("Doe");
+//		doctor.setGender("Male");
+//		doctor.setNicNumber("21584789478");
+//		doctor.setSpecialization("Skin");
+//		prescription.setDoctor(doctor);
+		
+		Medicine medicine = new Medicine();
+		medicine.setSerialNumber(1L);
+		medicine.setMedicineName("Adderall");
+		medicine.setManufacturedDate(new Date(2022, 4, 28));
+		medicine.setExpiryDate(new Date(2022, 12, 28));
+		medicine.setNotes("My notes");
+		Set<Medicine> medicineSet = new HashSet<Medicine>();
+		medicineSet.add(medicine);
+		prescription.setMedicineList(medicineSet);
 		prescription.setPrescriptionDate(Date.from(Instant.now()));
 
 		String inputJson = super.mapToJson(prescription);
@@ -39,7 +73,7 @@ class PrescriptionControllerTest extends AbstractTest {
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(201, status);
 		String content = mvcResult.getResponse().getContentAsString();
-//		assertEquals(, );
+		assertEquals("Prescription added successfully", content);
 	}
 
 	@Test

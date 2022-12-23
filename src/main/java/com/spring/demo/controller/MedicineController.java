@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -35,23 +36,23 @@ public class MedicineController {
 	}
 
 	@GetMapping(value = "/find/{serial}")
-	public Optional<Medicine> findById(@PathVariable @Positive Long serial) {
+	public ResponseEntity<Object> findById(@PathVariable @Positive Long serial) {
 		return medicineServiceImpl.findById(serial);
 	}
 
 	@PostMapping(value = "/add")
-	public Medicine insertMed(@RequestBody @Valid Medicine medicine) {
+	public ResponseEntity<Object> insertMed(@RequestBody @Valid Medicine medicine) {
 		return medicineServiceImpl.insertMed(medicine);
 	}
 
 	@PutMapping(value = "/update/{serial}")
-	public Medicine updateMed(@RequestBody @Valid Medicine medicine, @PathVariable @Positive Long serial) {
+	public ResponseEntity<Object> updateMed(@RequestBody @Valid Medicine medicine, @PathVariable @Positive Long serial) {
 		return medicineServiceImpl.updateMed(medicine, serial);	
 	}
 
 	@DeleteMapping(value = "/delete/{serial}")
-	public void deleteMed(@PathVariable @Positive Long serial) {
-		medicineServiceImpl.deleteMed(serial);
+	public ResponseEntity<Object> deleteMed(@PathVariable @Positive Long serial) {
+		return medicineServiceImpl.deleteMed(serial);
 	}
 
 }

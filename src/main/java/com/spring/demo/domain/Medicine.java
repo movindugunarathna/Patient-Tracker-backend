@@ -1,6 +1,7 @@
 package com.spring.demo.domain;
 
 import java.util.Date;
+import java.util.Set;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +42,9 @@ public class Medicine {
     @Column(name = "notes",nullable = false, length = 2048)
     @NotNull(message = "Notes cannot be blank")
 	private String notes;
+    
+    @ManyToMany(mappedBy = "medicineList")
+    private Set<Prescription> prescriptions;
 
 	public Medicine() {
 		super();
