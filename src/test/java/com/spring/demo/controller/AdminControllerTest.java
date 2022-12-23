@@ -4,7 +4,9 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import com.spring.demo.AbstractTest;
 import com.spring.demo.domain.Admin;
 
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class AdminControllerTest extends AbstractTest {
 
 	@Override

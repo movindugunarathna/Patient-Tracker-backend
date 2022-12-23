@@ -20,23 +20,24 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @SpringBootTest(classes = PatientTrackerBackendApplication.class)
 @WebAppConfiguration
 public abstract class AbstractTest {
-	
 	protected MockMvc mvc;
-	   @Autowired
-	   WebApplicationContext webApplicationContext;
+	@Autowired
+	WebApplicationContext webApplicationContext;
 
-	   protected void setUp() {
-	      mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
-	   }
-	   protected String mapToJson(Object obj) throws JsonProcessingException {
-	      ObjectMapper objectMapper = new ObjectMapper();
-	      return objectMapper.writeValueAsString(obj);
-	   }
-	   protected <T> T mapFromJson(String json, Class<T> clazz)
-	      throws JsonParseException, JsonMappingException, IOException {
-	      
-	      ObjectMapper objectMapper = new ObjectMapper();
-	      return objectMapper.readValue(json, clazz);
-	   }
+	protected void setUp() {
+		mvc = MockMvcBuilders.webAppContextSetup(webApplicationContext).build();
+	}
+
+	protected String mapToJson(Object obj) throws JsonProcessingException {
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.writeValueAsString(obj);
+	}
+
+	protected <T> T mapFromJson(String json, Class<T> clazz)
+			throws JsonParseException, JsonMappingException, IOException {
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		return objectMapper.readValue(json, clazz);
+	}
 
 }

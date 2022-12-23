@@ -1,4 +1,4 @@
-package com.spring.demo.exception.ClerkExceptions;
+package com.spring.demo.exception;
 
 import java.util.NoSuchElementException;
 
@@ -6,8 +6,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-
-import com.spring.demo.exception.ClerkNotFoundException;
 
 @ControllerAdvice
 public class ClerkControllerAdvice {

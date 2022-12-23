@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.demo.domain.Clerk;
 import com.spring.demo.exception.ClerkNotFoundException;
-import com.spring.demo.exception.ClerkExceptions.EmptyInputException;
+import com.spring.demo.exception.EmptyInputException;
 import com.spring.demo.repository.ClerkRepository;
 import com.spring.demo.service.ClerkService;
 
