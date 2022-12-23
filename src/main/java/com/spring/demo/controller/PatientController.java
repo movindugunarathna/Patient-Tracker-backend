@@ -1,8 +1,5 @@
 package com.spring.demo.controller;
 
-import java.util.List;
-import java.util.Optional;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +35,7 @@ public class PatientController {
 	}
 
 	@GetMapping(value = "/find/{id}")
-	public ResponseEntity<Object> findById(@PathVariable @Positive Long id) throws PatientNotFoundException {
+	public ResponseEntity<Object> findById(@PathVariable @Positive Long id) throws Exception {
 		return patientServiceImpl.findById(id);
 	}
 
@@ -48,7 +45,7 @@ public class PatientController {
 	}
 
 	@PutMapping(value = "/update/{id}")
-	public ResponseEntity<Object> updatePatient(@RequestBody @Valid Patient patient, @PathVariable @Positive Long id) {
+	public ResponseEntity<Object> updatePatient(@RequestBody @Valid Patient patient, @PathVariable @Positive Long id) throws PatientNotFoundException {
 		return patientServiceImpl.updatePatient(patient, id);	
 	}
 
@@ -57,8 +54,4 @@ public class PatientController {
 		return patientServiceImpl.deletePatient(id);
 	}
 
-	//	@PutMapping(value = "/{doctorId}/assign/{patientId}")
-	//  public Doctor assignPatients(@PathVariable Long doctorId, @PathVariable Long patientId) {
-	//      return doctorServiceImpl.assignPatients(doctorId, patientId);
-	//  }
 }

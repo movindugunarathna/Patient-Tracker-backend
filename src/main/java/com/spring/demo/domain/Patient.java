@@ -17,6 +17,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
 @Entity
 @Table(name = "patients")
@@ -26,25 +28,33 @@ public class Patient {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long patientId;
 
-	@Column(name = "first_name")
+	@Column(name = "first_name",nullable = false, length = 512)
+    @NotBlank(message = "Patient First Name cannot be blank")
 	private String firstName;
 
-	@Column(name = "last_name")
+	@Column(name = "last_name",nullable = false, length = 512)
+    @NotBlank(message = "Patient First Name cannot be blank")
 	private String lastName;
 	
-	@Column(name = "username")
+	@Column(name = "username",nullable = false, length = 512, unique = true)
+    @NotBlank(message = "Patient First Name cannot be blank")
 	private String username;
 
-	@Column(name = "age")
+	@Column(name = "age", nullable = false)
+    @NotBlank(message = "Age cannot be blank")
 	private String age;
 
-	@Column(name = "gender")
+	@Column(name = "gender",nullable = false)
+    @NotBlank(message = "Gender cannot be empty")
 	private String gender;
 
-	@Column(name = "contact_number")
+	@Column(name = "contact_number",nullable = false)
+    @NotBlank(message = "Contact number cannot be blank")
+	@Pattern(regexp = "^\\d{10}$", message = "Contact number must be a numeric value with 10 digits")
 	private String contactNumber;
 
-	@Column(name = "notes")
+	@Column(name = "notes",nullable = false)
+    @NotBlank(message = "Notes cannot be empty. Add Some notes")
 	private String notes;
 
 	@OneToOne(mappedBy = "patient")

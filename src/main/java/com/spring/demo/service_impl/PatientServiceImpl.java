@@ -1,6 +1,6 @@
 package com.spring.demo.service_impl;
 
-import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -11,11 +11,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.spring.demo.domain.Patient;
+import com.spring.demo.exception.BillNotFoundException;
 import com.spring.demo.exception.PatientNotFoundException;
 import com.spring.demo.repository.PatientRepository;
 import com.spring.demo.service.PatientService;
 
+import jakarta.transaction.Transactional;
+
 @Service
+@Transactional
 public class PatientServiceImpl implements PatientService {
 
 	private static final Logger logger = LoggerFactory.getLogger(PatientServiceImpl.class);
@@ -30,10 +34,19 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public ResponseEntity<Object> findById(Long id) throws PatientNotFoundException{
-		Patient patient = patientRepository.findById(id).get();
-		logger.info("Get patient by patient ID.");
-		return new ResponseEntity<>(patient, HttpStatus.OK);
+	public ResponseEntity<Object> findById(Long id) throws Exception{
+		try {
+			try {
+				Patient patient = patientRepository.findById(id).get();
+				logger.info("Get patient by patient ID.");
+				return new ResponseEntity<>(patient, HttpStatus.OK);
+			} catch (NoSuchElementException ex) {
+				throw new PatientNotFoundException("Patient Not Found");
+			}
+		} catch (PatientNotFoundException ex) {
+			throw new PatientNotFoundException(ex.getMessage());
+		}
+
 	}
 
 	@Override
@@ -44,16 +57,16 @@ public class PatientServiceImpl implements PatientService {
 	}
 
 	@Override
-	public ResponseEntity<Object> updatePatient(Patient patient, Long id) {
-		Optional<Patient> findPatient = patientRepository.findById(id);
+	public ResponseEntity<Object> updatePatient(Patient patient, Long id) throws PatientNotFoundException {
 
-		if (findPatient != null) {
-			patient.setPatientId(id);
-			patientRepository.save(patient);
-			logger.info("Update patient details using patient ID.");
-			return new ResponseEntity<>("Patient updated successsfully", HttpStatus.OK);
-		}
-		return null;
+		patientRepository.findById(id)
+		.orElseThrow(()
+				-> new PatientNotFoundException("Patient not found."));
+		patient.setPatientId(id);
+		patientRepository.save(patient);
+		logger.info("Update patient details using patient ID.");
+		return new ResponseEntity<>("Patient updated successsfully", HttpStatus.OK);
+
 	}
 
 	@Override
@@ -67,18 +80,5 @@ public class PatientServiceImpl implements PatientService {
 			return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
 		}
 	}
-	//
-//	public Doctor assignPatients(Long doctorId, Long patientId) {
-//		
-//		Set<Patient> patientSet = null;
-//		
-//		Doctor doc = doctorRepository.findById(doctorId).get();
-//		Patient patient = patientRepository.findById(patientId).get();
-//		
-//		patientSet = doc.getPatientList();
-//		patientSet.add(patient);
-//		doc.setPatientList(patientSet);
-//		return doctorRepository.save(doc);
-//		
-//	}
+	
 }
