@@ -1,4 +1,4 @@
-package com.spring.demo;
+package com.spring.demo.controller;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
@@ -13,10 +13,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import com.spring.demo.AbstractTest;
 import com.spring.demo.domain.Bill;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class BillServiceControllerTest extends PatientTest{
+public class BillServiceControllerTest extends AbstractTest{
 	
 	@Override
 	@Before
