@@ -112,7 +112,7 @@ public class BillServiceControllerTest extends PatientTest{
 	
 	@Test
 	public void z_deleteBill() throws Exception {
-		String uri = "/bill/delete/3";
+		String uri = "/bill/delete/4";
 		MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.delete(uri)).andReturn();
 		int status = mvcResult.getResponse().getStatus();
 		assertEquals(200, status);
